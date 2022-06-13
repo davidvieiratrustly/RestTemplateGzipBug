@@ -29,7 +29,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 class Demo1ApplicationTests {
 
   private static final ClientAndServer nettyMockServer = ClientAndServer.startClientAndServer(8080);
-  public static final HttpStatus HTTP_STATUS = HttpStatus.BAD_REQUEST;
+  public static final HttpStatus HTTP_STATUS = HttpStatus.NOT_FOUND;
 
   @Test
   void emptyGZIPResponse_Scenario_RestTemplate_ApacheHttpClient_Chunked() {
@@ -215,7 +215,6 @@ class Demo1ApplicationTests {
     HttpResponse httpResponse = response()
         .withStatusCode(HTTP_STATUS.value())
         .withConnectionOptions(connectionOptions)
-        // if you remove this line, everything works
         .withHeader("Content-Encoding", "gzip")
         .withBody(new byte[0]);
 
