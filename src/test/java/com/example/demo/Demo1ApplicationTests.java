@@ -29,6 +29,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 class Demo1ApplicationTests {
 
   private static final ClientAndServer nettyMockServer = ClientAndServer.startClientAndServer(8080);
+  public static final HttpStatus HTTP_STATUS = HttpStatus.ALREADY_REPORTED;
 
   @Test
   void emptyGZIPResponse_Scenario_RestTemplate_ApacheHttpClient_Chunked() {
@@ -44,7 +45,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -61,7 +62,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -78,7 +79,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -95,7 +96,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -112,7 +113,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -129,7 +130,7 @@ class Demo1ApplicationTests {
     ResponseEntity<String> response = testRestTemplate.postForEntity(URI.create("http://localhost:8080/"), null, String.class);
 
     // THEN
-    Assertions.assertEquals(HttpStatus.FOUND, response.getStatusCode());
+    Assertions.assertEquals(HTTP_STATUS, response.getStatusCode());
   }
 
   @Test
@@ -216,7 +217,7 @@ class Demo1ApplicationTests {
 
   private void mockServer(ConnectionOptions connectionOptions) {
     HttpResponse httpResponse = response()
-        .withStatusCode(HttpStatus.FOUND.value())
+        .withStatusCode(HTTP_STATUS.value())
         .withConnectionOptions(connectionOptions)
         .withHeader("Content-Encoding", "gzip")
         .withBody(new byte[0]);
