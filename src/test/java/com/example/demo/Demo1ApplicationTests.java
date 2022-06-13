@@ -215,6 +215,7 @@ class Demo1ApplicationTests {
     HttpResponse httpResponse = response()
         .withStatusCode(HTTP_STATUS.value())
         .withConnectionOptions(connectionOptions)
+        // if you remove this line, everything works
         .withHeader("Content-Encoding", "gzip")
         .withBody(new byte[0]);
 
