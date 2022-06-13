@@ -29,7 +29,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 class Demo1ApplicationTests {
 
   private static final ClientAndServer nettyMockServer = ClientAndServer.startClientAndServer(8080);
-  public static final HttpStatus HTTP_STATUS = HttpStatus.ALREADY_REPORTED;
+  public static final HttpStatus HTTP_STATUS = HttpStatus.BAD_REQUEST;
 
   @Test
   void emptyGZIPResponse_Scenario_RestTemplate_ApacheHttpClient_Chunked() {
@@ -147,9 +147,8 @@ class Demo1ApplicationTests {
     String response = WebClient.builder().clientConnector(connector)
         .baseUrl("http://localhost:8080/").build()
         .post()
-        .retrieve()
-        .bodyToFlux(String.class)
-        .blockFirst();
+        .exchangeToMono(r -> r.bodyToMono(String.class))
+        .block();
 
     // THEN
     Assertions.assertNull(response);
@@ -169,9 +168,8 @@ class Demo1ApplicationTests {
     String response = WebClient.builder().clientConnector(connector)
         .baseUrl("http://localhost:8080/").build()
         .post()
-        .retrieve()
-        .bodyToFlux(String.class)
-        .blockFirst();
+        .exchangeToMono(r -> r.bodyToMono(String.class))
+        .block();
 
     // THEN
     Assertions.assertNull(response);
@@ -188,9 +186,8 @@ class Demo1ApplicationTests {
     String response = WebClient.builder().clientConnector(new HttpComponentsClientHttpConnector())
         .baseUrl("http://localhost:8080/").build()
         .post()
-        .retrieve()
-        .bodyToFlux(String.class)
-        .blockFirst();
+        .exchangeToMono(r -> r.bodyToMono(String.class))
+        .block();
 
     // THEN
     Assertions.assertNull(response);
@@ -207,9 +204,8 @@ class Demo1ApplicationTests {
     String response = WebClient.builder().clientConnector(new HttpComponentsClientHttpConnector())
         .baseUrl("http://localhost:8080/").build()
         .post()
-        .retrieve()
-        .bodyToFlux(String.class)
-        .blockFirst();
+        .exchangeToMono(r -> r.bodyToMono(String.class))
+        .block();
 
     // THEN
     Assertions.assertNull(response);
